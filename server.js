@@ -10,18 +10,13 @@ if (port == null || port == '') {
   port = 3000
 }
 
-app.use(express.static('public')) // will make content of public folder available from rout of our server
-
-let connectionString = 'mongodb://TodoAppUser:vkPHARPulp0cpcwm@cluster0-shard-00-00-jqitl.mongodb.net:27017,cluster0-shard-00-01-jqitl.mongodb.net:27017,cluster0-shard-00-02-jqitl.mongodb.net:27017/TodoApp?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
-mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client) {
-      if (err) {
-        console.log("err:" + err);
-      } else {
-        db = client.db();
-        app.listen(port);
-        console.log("DB connection successfull");
-      }
-    })
+app.use(express.static("public"))     
+// Connect to DB
+let connection = "mongodb+srv://todoAppUser:todotodo@cluster0.jqitl.mongodb.net/todoApp?retryWrites=true&w=majority"
+mongodb.connect(connection, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){                    // connection string, ..., function after connection
+  db = client.db()
+  app.listen(port)
+})    
 
 app.use(express.json())    //set up browser side JavaScript code to asynchronously send a request to our node J.S. server. Using JS on front & back end
 app.use(express.urlencoded({extended: false}))    // tells express to automaticaly take submit form data and add it to body object that lives on request object
