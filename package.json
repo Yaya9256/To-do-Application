@@ -2,6 +2,9 @@
   "name": "to_do_app",
   "version": "1.0.0",
   "description": "",
+  "engines" : {
+    "node": "14.15.4",
+  },
   "main": "server.js",
   "scripts": {
     "watch": "nodemon server",
